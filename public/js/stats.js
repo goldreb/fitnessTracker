@@ -8,15 +8,17 @@ fetch("/api/workouts/range")
     populateChart(data);
   });
 
-API.getWorkoutsInRange();
+API.getWorkoutsInRange().then(populateChart);
 
 function populateChart(data) {
-  const durations = duration;
+  const durations = data.map(({ totalDuration }) => totalDuration);
   const pounds = calculateTotalWeight(data);
   const workouts = workoutNames(data);
+  const colors = generatePalette(data);
 
   const line = document.querySelector("#canvas").getContext("2d");
   const bar = document.querySelector("#canvas2").getContext("2d");
+  const pie = document.querySelector("#canvas3").getContext("2d");
 
   const labels = data.map(({ day }) => {
     const date = new Date(day);
@@ -101,45 +103,76 @@ function populateChart(data) {
       },
     },
   });
-}
 
-function duration(data) {
-  const durations = [];
+  function generatePalette() {
+    const arr = [
+      "#003f5c",
+      "#2f4b7c",
+      "#665191",
+      "#a05195",
+      "#d45087",
+      "#f95d6a",
+      "#ff7c43",
+      "ffa600",
+      "#003f5c",
+    ];
 
-  data.forEach((workout) => {
-    workout.exercises.forEach((exercise) => {
-      durations.push(exercise.duration);
+    return arr;
+  }
+
+  let pieChart = new Chart(pie, {
+    type: "pie",
+    data: {
+      labels: workouts,
+      datasets: [
+        {
+          label: "Excercises Performed",
+          backgroundColor: colors,
+          data: durations,
+        },
+      ],
+    },
+    options: {
+      title: {
+        display: true,
+        text: "Excercises Performed",
+      },
+    },
+  });
+
+  function duration(data) {
+    let durations = [];
+
+    data.forEach((workout) => {
+      workout.exercises.forEach((exercise) => {
+        durations.push(exercise.duration);
+      });
     });
-  });
 
-  return durations;
-}
+    return durations;
+  }
 
-function calculateTotalWeight(data) {
-  const totals = [];
+  function calculateTotalWeight(data) {
+    let total = [];
 
-  data.forEach((workout) => {
-    const workoutTotal = workout.exercises.reduce((total, { type, weight }) => {
-      if (type === "resistance") {
-        return total + weight;
-      }
-      return total;
-    }, 0);
-
-    totals.push(workoutTotal);
-  });
-
-  return totals;
-}
-
-function workoutNames(data) {
-  const workouts = [];
-
-  data.forEach((workout) => {
-    workout.exercises.forEach((exercise) => {
-      workouts.push(exercise.name);
+    data.forEach((workout) => {
+      workout.exercises.forEach((exercise) => {
+        total.push(exercise.weight);
+      });
     });
-  });
 
-  return workouts;
+    return total;
+  }
+
+  function workoutNames(data) {
+    let workouts = [];
+
+    data.forEach((workout) => {
+      workout.exercises.forEach((exercise) => {
+        workouts.push(exercise.name);
+      });
+    });
+
+    return workouts;
+  }
 }
