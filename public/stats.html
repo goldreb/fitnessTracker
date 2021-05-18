@@ -4,19 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="theme-color" content="#317EFB" />
+
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
     <title>Fitness Chart</title>
   </head>
   <nav>
     <a href="/">Fitness Tracker</a>
   </nav>
-
   <body>
     <div class="container mt">
       <h1 class="text-center">Workout Dashboard</h1>
@@ -28,9 +27,17 @@
           <canvas id="canvas2"></canvas>
         </div>
       </div>
+      <div class="row mt">
+        <div class="col-md-6">
+          <canvas id="canvas3"></canvas>
+        </div>
+        <div class="col-md-6">
+          <canvas id="canvas4"></canvas>
+        </div>
+      </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.2.0/dist/chart.min.js"></script>
-    <script src="/api.js"></script>
-    <script src="/stats.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/stats.js"></script>
   </body>
 </html>
