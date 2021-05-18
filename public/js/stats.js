@@ -11,7 +11,7 @@ fetch("/api/workouts/range")
 API.getWorkoutsInRange();
 
 function populateChart(data) {
-  const durations = data.map(({ totalDuration }) => totalDuration);
+  const durations = duration;
   const pounds = calculateTotalWeight(data);
   const workouts = workoutNames(data);
 
