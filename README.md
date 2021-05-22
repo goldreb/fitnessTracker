@@ -13,7 +13,7 @@
 
 ![dashboard](public/assets/dashboard.JPG)
 
-![fitnessTracker](public/assets/dashboard.JPG)
+![fitnessTracker](public/assets/fitnessTracker.JPG)
 
 ![Gif](public/assets/fitness.gif)
 
